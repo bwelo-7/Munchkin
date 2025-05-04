@@ -29,24 +29,34 @@ textRect.center =  (WIDTH // 2, HEIGHT // 2)
 
 #game loop
 running = True
-while running:
-
-    #keep loop running at the right speed
-    clock.tick(FPS)
-    # Process input (events)
-    for event in pygame.event.get():
-            #check for closing the window
-            if event.type == pygame.QUIT:
-                running = False
-    # Update
-    # all_sprites.update()
 
 
-    # Draw / render
+def draw():
     screen.fill(BLACK)
     screen.blit(text, textRect)
     # all_sprites.draw(screen)
     # after drawing everything
     pygame.display.flip()
+
+
+def update():
+    global running
+    # keep loop running at the right speed
+    clock.tick(FPS)
+    # Process input (events)
+    for event in pygame.event.get():
+        # check for closing the window
+        if event.type == pygame.QUIT:
+            running = False
+    # Update
+    # all_sprites.update()
+
+
+while running:
+
+    update()
+
+    # Draw / render
+    draw()
 
 pygame.quit()
