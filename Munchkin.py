@@ -19,9 +19,9 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('My game')
 clock = pygame.time.Clock()
 
-font = pygame.font.Font('freesansbold.ttf', 32)
+font = pygame.font.Font('freesansbold.ttf', 20)
 
-text = font.render('There is a door in front of you \n Press enter to kick it down',True, GREEN, BLUE)
+text = font.render('There is a door in front of you, Press enter to kick it down',True, GREEN, BLACK)
 
 textRect = text.get_rect()
 
