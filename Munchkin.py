@@ -21,11 +21,7 @@ clock = pygame.time.Clock()
 
 font = pygame.font.Font('freesansbold.ttf', 20)
 
-text = font.render('There is a door in front of you, Press enter to kick it down',True, GREEN, BLACK)
-
-textRect = text.get_rect()
-
-textRect.center =  (WIDTH // 2, HEIGHT // 2)
+message = 'There is a door in front of you, Press enter to kick it down'
 
 #game loop
 running = True
@@ -33,7 +29,15 @@ running = True
 
 def draw():
     screen.fill(BLACK)
+
+    text = font.render(message, True, GREEN, BLACK)
+
+    textRect = text.get_rect()
+
+    textRect.center = (WIDTH // 2, HEIGHT // 2)
+
     screen.blit(text, textRect)
+
     # all_sprites.draw(screen)
     # after drawing everything
     pygame.display.flip()
@@ -41,6 +45,10 @@ def draw():
 
 def update():
     global running
+    global message
+    keystate = pygame.key.get_pressed()
+    if keystate[pygame.K_RETURN]:
+        message = 'boop'
     # keep loop running at the right speed
     clock.tick(FPS)
     # Process input (events)
