@@ -1,8 +1,8 @@
 import pygame
 import random
 
-WIDTH = 360
-HEIGHT = 480
+WIDTH = 800
+HEIGHT = 600
 FPS = 30
 
 # define colours
@@ -19,10 +19,18 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('My game')
 clock = pygame.time.Clock()
 
-all_sprites = pygame.sprite.Group()
+font = pygame.font.Font('freesansbold.ttf', 32)
+
+text = font.render('There is a door in front of you \n Press enter to kick it down',True, GREEN, BLUE)
+
+textRect = text.get_rect()
+
+textRect.center =  (WIDTH // 2, HEIGHT // 2)
+
 #game loop
 running = True
 while running:
+
     #keep loop running at the right speed
     clock.tick(FPS)
     # Process input (events)
@@ -31,12 +39,13 @@ while running:
             if event.type == pygame.QUIT:
                 running = False
     # Update
-    all_sprites.update()
+    # all_sprites.update()
 
 
     # Draw / render
     screen.fill(BLACK)
-    all_sprites.draw(screen)
+    screen.blit(text, textRect)
+    # all_sprites.draw(screen)
     # after drawing everything
     pygame.display.flip()
 
