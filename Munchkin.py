@@ -19,6 +19,29 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('My game')
 clock = pygame.time.Clock()
 
+# creating the monster class
+class Door(pygame.sprite.Sprite):
+    def __init__(self):
+        print('Door class created')
+
+class Monster(pygame.sprite.Sprite):
+    def __init__(self, name, pwr_lvl, image_path, pos=(WIDTH // 2, HEIGHT // 2)):
+        super().__init__()
+        self.name = name
+        self.level = pwr_lvl
+
+        try:
+            self.image = pygame.image.load(image_path).convert_alpha()
+        except pygame.error():
+            print(f'image failed to load: {image_path}')
+            self.image = pygame.Surface((50,50))
+            self.image.fill((225, 0, 0))
+        self.rect = self.image.get_rect(topleft=pos)
+
+
+
+
+
 font = pygame.font.Font('freesansbold.ttf', 20)
 
 message = 'There is a door in front of you, Press enter to kick it down'
@@ -42,6 +65,36 @@ def draw():
     # after drawing everything
     pygame.display.flip()
 
+# how a game works.
+# [Door] kick down the door
+# [Encounter] get a door card
+    # a monster
+        # run away
+        # fight
+            # ask for help
+            # win - get loot
+            # lose - something bad
+    # not a monster
+        # curse
+        # something else
+        # loot the room -free loot
+# [Trade] trade
+# [Sell] sell stuff?
+# [Charity] give stuff away
+
+# loot cards
+    #gear treasure etc
+# door cards
+    # monsters curses race etc
+
+
+# homework
+    # make it go through all the phases of a turn for a 1 player game
+    # show monster
+    # give options
+    # auto win fight
+    # get loot
+    # level up
 
 def update():
     global running
@@ -64,7 +117,6 @@ while running:
 
     update()
 
-    # Draw / render
     draw()
 
 pygame.quit()
