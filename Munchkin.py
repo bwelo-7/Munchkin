@@ -38,9 +38,9 @@ class Monster(pygame.sprite.Sprite):
             self.image.fill((225, 0, 0))
         self.rect = self.image.get_rect(topleft=pos)
 
+crabs_mon = Monster('crabs', 1, 'Crabs.PNG')
 
-
-
+current_monster = crabs_mon
 
 font = pygame.font.Font('freesansbold.ttf', 20)
 
@@ -52,18 +52,44 @@ running = True
 
 def draw():
     screen.fill(BLACK)
-
     text = font.render(message, True, GREEN, BLACK)
-
     textRect = text.get_rect()
-
     textRect.center = (WIDTH // 2, HEIGHT // 2)
-
     screen.blit(text, textRect)
+
 
     # all_sprites.draw(screen)
     # after drawing everything
     pygame.display.flip()
+
+
+
+def update():
+    global running
+    global message
+    keystate = pygame.key.get_pressed()
+    if keystate[pygame.K_RETURN]:
+        message = 'boop'
+
+
+    # keep loop running at the right speed
+    clock.tick(FPS)
+    # Process input (events)
+    for event in pygame.event.get():
+        # check for closing the window
+        if event.type == pygame.QUIT:
+            running = False
+    # Update
+    # all_sprites.update()
+
+
+while running:
+
+    update()
+
+    draw()
+
+pygame.quit()
 
 # how a game works.
 # [Door] kick down the door
@@ -95,28 +121,3 @@ def draw():
     # auto win fight
     # get loot
     # level up
-
-def update():
-    global running
-    global message
-    keystate = pygame.key.get_pressed()
-    if keystate[pygame.K_RETURN]:
-        message = 'boop'
-    # keep loop running at the right speed
-    clock.tick(FPS)
-    # Process input (events)
-    for event in pygame.event.get():
-        # check for closing the window
-        if event.type == pygame.QUIT:
-            running = False
-    # Update
-    # all_sprites.update()
-
-
-while running:
-
-    update()
-
-    draw()
-
-pygame.quit()
